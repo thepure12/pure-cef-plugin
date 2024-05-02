@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>Pure Cef Plugin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div>
+      <div class="absolute right-0 cursor-pointer" onclick="newWindow()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 16 16"
+        >
+          <g fill="currentColor">
+            <path
+              d="M6.22 8.72a.75.75 0 0 0 1.06 1.06l5.22-5.22v1.69a.75.75 0 0 0 1.5 0v-3.5a.75.75 0 0 0-.75-.75h-3.5a.75.75 0 0 0 0 1.5h1.69z"
+            />
+            <path
+              d="M3.5 6.75c0-.69.56-1.25 1.25-1.25H7A.75.75 0 0 0 7 4H4.75A2.75 2.75 0 0 0 2 6.75v4.5A2.75 2.75 0 0 0 4.75 14h4.5A2.75 2.75 0 0 0 12 11.25V9a.75.75 0 0 0-1.5 0v2.25c0 .69-.56 1.25-1.25 1.25h-4.5c-.69 0-1.25-.56-1.25-1.25z"
+            />
+          </g>
+        </svg>
+      </div>
+      <div class="text-center text-lg pt-2">Pure Cef Example Plugin</div>
+      <div class="border-b mx-3"></div>
+      <div class="p-3 text-center space-y-2">
+        <button
+          onclick="fetchData()"
+          class="text-slate-800 hover:bg-green-600 bg-green-500 px-3 rounded border-none"
+        >
+          Fetch Data
+        </button>
+        <button
+          onclick="fetchData(true)"
+          class="text-slate-800 hover:bg-green-600 bg-green-500 px-3 rounded border-none"
+        >
+          Fetch More Data
+        </button>
+        <div id="data"></div>
+      </div>
+    </div>
+    <script>
+      async function fetchData(more = false) {
+        const res = await fetch(
+          `https://purecef.me/api/${more ? "more_data" : "data"}`
+        );
+        const data = await res.json();
+        const dataDiv = document.querySelector("#data");
+        dataDiv.innerHTML = "";
+        data.forEach((e) => {
+          dataDiv.innerHTML += `<div>${e}</div>`;
+        });
+      }
+      function newWindow() {
+        const dimentions = `width=${window.innerWidth},height=${window.innerHeight}`
+        window.open(window.location.href, "", dimentions)
+      }
+    </script>
+    <style>
+      html {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        color: white;
+      }
+
+      html,
+      body {
+        background-color: rgb(40, 40, 40);
+      }
+    </style>
+  </body>
+</html>
