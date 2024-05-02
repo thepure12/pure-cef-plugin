@@ -1,2 +1,2 @@
-# Example
-An example greeter plugin
+# Pure CEF Example Plugin
+An example plugin the utilizes JCEF
